@@ -1,0 +1,104 @@
+@use "./map-atlas" as *;
+
+@font-face {
+  font-family: "VT323";
+  src: url("./assets/VT323-Regular.ttf") format("truetype");
+}
+
+@mixin game-font($size, $weight) {
+  font-family: "VT323", monospace;
+  font-size: $size;
+  font-weight: $weight;
+  line-height: 1;
+  text-shadow: 0.1rem 0.1rem 0.1rem rgba(0, 0, 0, 0.5);
+  font-smooth: 0;
+}
+
+* {
+  box-sizing: border-box;
+  user-select: none;
+}
+
+html,
+body {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  @include game-font(2rem, normal);
+  background-color: #292929;
+  color: #fff;
+
+  .game {
+    height: 100vh;
+    display: grid;
+    grid-template-rows: min-content auto min-content;
+
+    .resources,
+    .menu-buttons {
+      position: absolute;
+      padding: 16px;
+      left: 50%;
+      transform: translate(-50%, 0);
+    }
+
+    .resources {
+      top: 0;
+    }
+
+    .menu-buttons {
+      bottom: 0;
+    }
+
+    .middle-session {
+      padding: 0 4px;
+      height: 100vh;
+      display: grid;
+      grid-template-columns: min-content auto min-content;
+      gap: 4px;
+
+      .info,
+      .inventory {
+        background: #807468;
+        border: #292929 solid 1px;
+        border-radius: 10px;
+        width: 230px;
+      }
+
+      .scene {
+        height: 100vh;
+        border-radius: 10px;
+        overflow: hidden;
+
+        .world {
+          background: rgb(82, 116, 69) url("/assets/images/map-atlas.png");
+          width: calc(16 * 1500px);
+          height: calc(16 * 1000px);
+
+          .props-layer {
+            .prop {
+              position: relative;
+              width: 16px;
+              height: 16px;
+
+              @include game-props();
+            }
+          }
+        }
+      }
+    }
+
+    .ui-canvas {
+      top: 0;
+      left: 0;
+      display: absolute;
+      width: 100vw;
+      height: 100vh;
+      border: 1px red dotted;
+      z-index: 50;
+    }
+  }
+}

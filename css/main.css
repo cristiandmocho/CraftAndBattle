@@ -1,0 +1,100 @@
+@font-face {
+  font-family: "VT323";
+  src: url("./assets/VT323-Regular.ttf") format("truetype");
+}
+* {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+}
+
+html,
+body {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: "VT323", monospace;
+  font-size: 2rem;
+  font-weight: normal;
+  line-height: 1;
+  text-shadow: 0.1rem 0.1rem 0.1rem rgba(0, 0, 0, 0.5);
+  font-smooth: 0;
+  background-color: #292929;
+  color: #fff;
+}
+body .game {
+  height: 100vh;
+  display: grid;
+  grid-template-rows: -webkit-min-content auto -webkit-min-content;
+  grid-template-rows: min-content auto min-content;
+}
+body .game .resources,
+body .game .menu-buttons {
+  position: absolute;
+  padding: 16px;
+  left: 50%;
+  -webkit-transform: translate(-50%, 0);
+          transform: translate(-50%, 0);
+}
+body .game .resources {
+  top: 0;
+}
+body .game .menu-buttons {
+  bottom: 0;
+}
+body .game .middle-session {
+  padding: 0 4px;
+  height: 100vh;
+  display: grid;
+  grid-template-columns: -webkit-min-content auto -webkit-min-content;
+  grid-template-columns: min-content auto min-content;
+  gap: 4px;
+}
+body .game .middle-session .info,
+body .game .middle-session .inventory {
+  background: #807468;
+  border: #292929 solid 1px;
+  border-radius: 10px;
+  width: 230px;
+}
+body .game .middle-session .scene {
+  height: 100vh;
+  border-radius: 10px;
+  overflow: hidden;
+}
+body .game .middle-session .scene .world {
+  background: rgb(82, 116, 69) url("/assets/images/map-atlas.png");
+  width: 24000px;
+  height: 16000px;
+}
+body .game .middle-session .scene .world .props-layer .prop {
+  position: relative;
+  width: 16px;
+  height: 16px;
+}
+body .game .middle-session .scene .world .props-layer .prop.grass {
+  background-image: url("/assets/images/map-atlas.png");
+  background-repeat: no-repeat;
+  background-position: 0px 0;
+}
+body .game .middle-session .scene .world .props-layer .prop.flowers {
+  background-image: url("/assets/images/map-atlas.png");
+  background-repeat: no-repeat;
+  background-position: -16px 0;
+}
+body .game .ui-canvas {
+  top: 0;
+  left: 0;
+  display: absolute;
+  width: 100vw;
+  height: 100vh;
+  border: 1px red dotted;
+  z-index: 50;
+}
