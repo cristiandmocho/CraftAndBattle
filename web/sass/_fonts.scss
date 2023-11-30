@@ -1,10 +1,7 @@
-@font-face {
-  font-family: "VT323";
-  src: url("../assets/VT323-Regular.ttf") format("truetype");
-}
+@import url("https://fonts.googleapis.com/css2?family=Nova+Square&display=swap");
 
 @mixin game-font($size, $weight) {
-  font-family: "VT323", monospace;
+  font-family: "Nova Square", sans-serif;
   font-size: $size;
   font-weight: $weight;
   line-height: 1;

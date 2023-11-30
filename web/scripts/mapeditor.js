@@ -5,12 +5,12 @@
 
   const Map = {
     element: World.querySelector(".map"),
+    tileSelector: World.querySelector(".tile-selector"),
+    grid: World.querySelector(".map-grid"),
     name: "New Map",
     filename: null,
     unsaved: true,
-    data: [],
-    grid: World.querySelector(".map-grid"),
-    tileSelector: World.querySelector(".tile-selector"),
+    data: null,
     size: { width: 20, height: 20 }, // In tiles!!!
     resolution: 32, // pixels squared (ex: 32x32)
 
@@ -22,7 +22,7 @@
         y: tilePos.y / Map.resolution,
       };
 
-      console.log({ mousePos, tilePos, tile });
+      console.log({ mousePos, tilePos, tile, e });
     },
     onMouseMove: (e) => {
       const mousePos = fixedMousePosition(e);
@@ -36,8 +36,12 @@
         return;
       Map.tileSelector.style.top = `${tilePos.y}px`;
     },
-    Save() {},
-    Load() {},
+    Save() {
+      updatePageTitle();
+    },
+    Load() {
+      updatePageTitle();
+    },
   };
 
   function fixedMousePosition(e) {
@@ -123,16 +127,14 @@
     hideGrid();
   }
 
-  function toolsHandler(e) {
+  function editorToolsHandler(e) {
     const target = e.target;
     const tool = target.name;
 
     switch (tool) {
       case "btnMapDimensions": {
         const dlg = document.querySelector("#dlgMapDimensions");
-        dlg.showModal();
-
-        dlg.addEventListener("click", (e) => {
+        const dlgButtonsClick = (e) => {
           const target = e.target;
           const action = target.name;
 
@@ -154,7 +156,10 @@
           if (action === "btnCancel") {
             dlg.close();
           }
-        });
+        };
+
+        dlg.showModal();
+        dlg.addEventListener("click", dlgButtonsClick);
 
         break;
       }
@@ -170,6 +175,75 @@
 
       case "btnLoad":
         Map.Load();
+        break;
+
+      default:
+        console.log(tool);
+        break;
+    }
+  }
+
+  function uploadAssets(files, type) {
+    const formdata = new FormData();
+    formdata.append("file", files[0]);
+    formdata.append("assetType", "texture");
+
+    const requestOptions = {
+      method: "POST",
+      body: formdata,
+      redirect: "follow",
+    };
+
+    fetch("http://localhost:3000/upload", requestOptions)
+      .catch((err) => {
+        console.log(err);
+        alert("Upload failed, check console for details");
+      })
+      .then((response) => response.text())
+      .then((res) => {
+        console.log(res);
+        alert("Upload complete");
+      });
+  }
+
+  function inspectorToolsHandler(e) {
+    const target = e.target;
+    const tool = target.name;
+
+    switch (tool) {
+      case "btnImportAsset": {
+        const dlg = document.querySelector("#dlgImportAsset");
+        const dlgButtonsClick = (e) => {
+          const target = e.target;
+          const action = target.name;
+
+          if (action === "btnOk") {
+            const files = dlg.querySelector('[name="file"]').files;
+            const type = dlg.querySelector('[name="ddAssetType"]').value;
+
+            uploadAssets(files, type);
+
+            dlg.close();
+          }
+
+          if (action === "btnCancel") {
+            dlg.close();
+          }
+        };
+
+        dlg.showModal();
+        dlg.addEventListener("click", dlgButtonsClick);
+
+        break;
+      }
+
+      case "btnNewSprite":
+        break;
+
+      case "btnNewAnimation":
+        break;
+
+      case "btnNewEntity":
         break;
 
       default:
@@ -194,6 +268,9 @@
   Map.element.addEventListener("mousemove", Map.onMouseMove);
 
   // Events
-  const $tools = Editor.querySelector(".tools");
-  $tools.addEventListener("click", toolsHandler);
+  Editor.querySelector(".tools").addEventListener("click", editorToolsHandler);
+  Inspector.querySelector(".tools").addEventListener(
+    "click",
+    inspectorToolsHandler
+  );
 })();

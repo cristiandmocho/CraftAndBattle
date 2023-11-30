@@ -20,9 +20,10 @@
             <button name="btnNewEntity" title="Create new entity">EN</button>
           </div>
           <select name="ddAssetType">
-            <option value="sprite">Sprites</option>
+            <option value="texture">Texture/Sprite Atlas</option>
             <option value="animation">Animations</option>
             <option value="audio">Audio</option>
+            <option value="sprite">Sprites</option>
             <option value="entity">Entities</option>
             <option value="enemy">Enemy spawn points</option>
             <option value="player">Player spawn points</option>
@@ -62,6 +63,7 @@
         </div>
       </section>
     </div>
+
     <dialog id="dlgMapDimensions">
       <legend>Map Dimensions</legend>
       <form>
@@ -76,6 +78,27 @@
         <div class="formgroup">
           <label>Tile Size (px)</label>
           <input type="number" name="txtTileSize" value="32" />
+        </div>
+      </form>
+      <section class="buttons">
+        <button type="button" name="btnOk">Ok</button>
+        <button type="button" name="btnCancel">Cancel</button>
+      </section>
+    </dialog>
+
+    <dialog id="dlgImportAsset">
+      <legend>Import Assets</legend>
+      <form>
+        <div class="formgroup">
+          <label>Asset type</label>
+          <select name="ddAssetType">
+            <option value="sprite">Texture/Sprite Atlas</option>
+            <option value="animation">Animations</option>
+            <option value="audio">Audio</option>
+          </select>
+        </div>
+        <div class="formgroup">
+          <input type="file" name="file" />
         </div>
       </form>
       <section class="buttons">
