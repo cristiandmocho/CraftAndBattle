@@ -1,8 +1,10 @@
 @import "fonts";
+@import "scrollbar";
 
 * {
   box-sizing: border-box;
   user-select: none;
+  outline: none;
 }
 
 html,

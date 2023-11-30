@@ -1,7 +1,14 @@
 (() => {
-  const World = document.querySelector(".world");
+  const Inspector = document.querySelector(".inspector");
+  const Editor = document.querySelector(".editor");
+  const World = Editor.querySelector(".world");
+
   const Map = {
     element: World.querySelector(".map"),
+    name: "New Map",
+    filename: null,
+    unsaved: true,
+    data: [],
     grid: World.querySelector(".map-grid"),
     tileSelector: World.querySelector(".tile-selector"),
     size: { width: 20, height: 20 }, // In tiles!!!
@@ -21,16 +28,16 @@
       const mousePos = fixedMousePosition(e);
       const tilePos = fixedToGrid(mousePos, Map.resolution);
 
-      if (tilePos.x < 0 || tilePos.y < 0) return;
+      if (mousePos.x < 0 || mousePos.x > Map.size.width * Map.resolution - 5)
+        return;
       Map.tileSelector.style.left = `${tilePos.x}px`;
 
-      if (
-        tilePos.x > Map.size.width * Map.resolution - Map.resolution ||
-        tilePos.y > Map.size.height * Map.resolution - Map.resolution
-      )
+      if (mousePos.y < 0 || mousePos.y > Map.size.width * Map.resolution - 5)
         return;
       Map.tileSelector.style.top = `${tilePos.y}px`;
     },
+    Save() {},
+    Load() {},
   };
 
   function fixedMousePosition(e) {
@@ -38,11 +45,13 @@
       x:
         e.clientX -
         e.currentTarget.parentNode.offsetLeft +
-        e.currentTarget.parentNode.scrollLeft,
+        e.currentTarget.parentNode.scrollLeft -
+        1,
       y:
         e.clientY -
         e.currentTarget.parentNode.offsetTop +
-        e.currentTarget.parentNode.scrollTop,
+        e.currentTarget.parentNode.scrollTop -
+        1,
     };
     return mousePos;
   }
@@ -108,8 +117,8 @@
     Map.size.height = height;
     Map.resolution = res;
 
-    Map.tileSelector.style.width = `${res}px`;
-    Map.tileSelector.style.height = `${res}px`;
+    Map.tileSelector.style.width = `${res - 2}px`;
+    Map.tileSelector.style.height = `${res - 2}px`;
 
     hideGrid();
   }
@@ -149,22 +158,35 @@
 
         break;
       }
-      case "btnAtlasImporter":
-        break;
-      case "btnSpriteCreator":
-        break;
+
       case "btnToggleGrid":
         if (Map.grid.dataset.visible === "Y") hideGrid();
         else showGrid();
         break;
+
+      case "btnSave":
+        Map.Save();
+        break;
+
+      case "btnLoad":
+        Map.Load();
+        break;
+
       default:
         console.log(tool);
         break;
     }
   }
 
+  function updatePageTitle() {
+    document.title = `Map Editor - ${Map.name}`;
+    if (Map.unsaved) document.title += "*";
+  }
+
   // Init
   resizeMap(Map.size.width, Map.size.height, Map.resolution);
+  showGrid();
+  updatePageTitle();
 
   // Map events
   Map.element.addEventListener("contextmenu", (e) => e.preventDefault());
@@ -172,6 +194,6 @@
   Map.element.addEventListener("mousemove", Map.onMouseMove);
 
   // Events
-  const $tools = document.querySelector(".tools");
+  const $tools = Editor.querySelector(".tools");
   $tools.addEventListener("click", toolsHandler);
 })();

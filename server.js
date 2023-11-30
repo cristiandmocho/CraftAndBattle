@@ -1,4 +1,7 @@
 import express from "express";
+import multer from "multer";
+import { mkdirSync, writeFileSync } from "node:fs";
+import { resolve, join } from "node:path";
 
 class Server {
   constructor() {
@@ -22,6 +25,28 @@ class Server {
 
   routes() {
     this.server.use(express.static("web"));
+
+    // Upload files
+    const storage = multer.memoryStorage();
+    const upload = multer({ storage: storage });
+
+    this.server.post("/upload", upload.single("file"), (req, res) => {
+      // Makes sure the "upload" folder exists
+      const destFolder = resolve(join("web", "upload"));
+
+      mkdirSync(destFolder, { recursive: true });
+
+      // Writes the file to disk
+      const filename = req.file.originalname;
+      const filepath = join(destFolder, filename);
+
+      writeFileSync(filepath, req.file.buffer);
+
+      res.json({
+        message: "success",
+        file: join("web", "upload", filename).replace(/\\/g, "/"),
+      });
+    });
   }
 
   start() {

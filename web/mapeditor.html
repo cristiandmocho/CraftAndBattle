@@ -3,20 +3,29 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Map Editor - v.0.0.1</title>
-    <link rel="stylesheet" href="/css/mapeditor.css" />
-    <script type="module" src="/scripts/mapeditor.js"></script>
+    <title>Map Editor</title>
+    <link rel="stylesheet" href="css/mapeditor.css" />
+    <script type="module" src="scripts/mapeditor.js"></script>
   </head>
   <body>
     <div class="game">
       <section class="inspector">
         <legend>Inspector</legend>
         <div class="assets">
+          <div class="tools">
+            <button name="btnImportAsset" title="Import asset">IA</button>
+            <button name="btnNewSprite" title="Create sprites">CS</button>
+            <button name="btnNewAnimation" title="Create animations">AN</button>
+            <hr />
+            <button name="btnNewEntity" title="Create new entity">EN</button>
+          </div>
           <select name="ddAssetType">
-            <option value="sprite">Sprite</option>
-            <option value="animation">Animation</option>
-            <option value="enemy">Enemy spawn point</option>
-            <option value="player">Player spawn point</option>
+            <option value="sprite">Sprites</option>
+            <option value="animation">Animations</option>
+            <option value="audio">Audio</option>
+            <option value="entity">Entities</option>
+            <option value="enemy">Enemy spawn points</option>
+            <option value="player">Player spawn points</option>
           </select>
           <div class="asset-list"></div>
         </div>
@@ -27,21 +36,18 @@
       </section>
       <section class="editor">
         <div class="tools">
-          <button name="btnMapDimensions" title="Map dimensions">MD</button>
-          <button name="btnAtlasImporter" title="Atlas importer">AI</button>
-          <button name="btnSpriteCreator" title="Sprite creator">SC</button>
-          <select name="ddLayer">
+          <select name="ddLayer" title="Layer">
             <option value="background">Background</option>
             <option value="constructions">Constructions</option>
             <option value="props">Props</option>
             <option value="enemies">Enemies</option>
             <option value="players">Players</option>
           </select>
-          <button name="btnNewGameEntity" title="New Game Entity">New</button>
-          <button name="btnPlaceGameEntity" title="Place Game Entity">
-            Place
-          </button>
+          <button name="btnMapDimensions" title="Map dimensions">MD</button>
           <button name="btnToggleGrid" title="Toggle grid">GR</button>
+          <hr />
+          <button name="btnSave" title="Save map data">Save</button>
+          <button name="btnLoad" title="Load map data">Load</button>
         </div>
         <div class="world">
           <div class="map">
