@@ -1,0 +1,166 @@
+@font-face {
+  font-family: "VT323";
+  src: url("../assets/VT323-Regular.ttf") format("truetype");
+}
+* {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+}
+
+html,
+body {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: "VT323", monospace;
+  font-size: 1rem;
+  font-weight: normal;
+  line-height: 1;
+  text-shadow: 0.1rem 0.1rem 0.1rem rgba(0, 0, 0, 0.5);
+  font-smooth: 0;
+  background-color: #292929;
+  color: #fff;
+}
+body .game {
+  height: 100vh;
+  display: grid;
+  grid-template-columns: 1fr 4fr;
+  gap: 8px;
+}
+body .game .editor {
+  display: grid;
+  grid-template-rows: -webkit-min-content auto;
+  grid-template-rows: min-content auto;
+  gap: 4px;
+  padding: 8px;
+}
+body .game .editor .tools {
+  display: grid;
+  grid-auto-flow: column;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: start;
+  gap: 4px;
+  padding: 4px;
+  background-color: #333;
+  border: 1px solid #444;
+  border-radius: 4px;
+}
+body .game .editor .tools button {
+  background: #444;
+  color: #fff;
+  border: solid 1px #888;
+  border-radius: 4px;
+  padding: 4px;
+  cursor: pointer;
+}
+body .game .editor .tools button:hover {
+  background: #555;
+}
+body .game .editor .world {
+  border: solid 1px #888;
+  background: #444;
+  border-radius: 4px;
+  position: sticky;
+  overflow: auto;
+}
+body .game .editor .world::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+body .game .editor .world::-webkit-scrollbar-track {
+  background: #444;
+}
+body .game .editor .world::-webkit-scrollbar-thumb {
+  background: #666;
+  border-radius: 4px;
+}
+body .game .editor .world .map {
+  border: solid 1px #89a0aa;
+}
+body .game .editor .world div,
+body .game .editor .world canvas {
+  position: absolute;
+}
+body .game .editor .world .map-grid {
+  z-index: 0;
+}
+body .game .editor .world .background-layer {
+  z-index: 1;
+}
+body .game .editor .world .constructions-layer {
+  z-index: 2;
+}
+body .game .editor .world .props-layer {
+  z-index: 3;
+}
+body .game .editor .world .enemies-layer {
+  z-index: 4;
+}
+body .game .editor .world .players-layer {
+  z-index: 5;
+}
+body .game .editor .world .tile-selector {
+  display: block;
+  position: absolute;
+  background: #555;
+  border: solid 1px #888;
+  z-index: 6;
+}
+
+dialog {
+  background: #333;
+  color: #fff;
+  border: solid 1px #888;
+  border-radius: 8px;
+  padding: 0px;
+}
+dialog legend {
+  padding: 8px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  background: #444;
+  margin-bottom: 10px;
+}
+dialog form {
+  padding: 8px;
+}
+dialog form .formgroup {
+  display: grid;
+  grid-auto-flow: row;
+  gap: 4px;
+  margin-bottom: 10px;
+}
+dialog form .formgroup label {
+  display: block;
+}
+dialog .buttons {
+  background: #444;
+  display: grid;
+  grid-auto-flow: column;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: end;
+  gap: 4px;
+  margin-top: 10px;
+  padding: 8px;
+}
+dialog .buttons button {
+  background: #444;
+  color: #fff;
+  border: solid 1px #888;
+  border-radius: 4px;
+  padding: 4px;
+  cursor: pointer;
+}
+dialog .buttons button:hover {
+  background: #555;
+}

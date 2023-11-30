@@ -1,0 +1,13 @@
+@font-face {
+  font-family: "VT323";
+  src: url("../assets/VT323-Regular.ttf") format("truetype");
+}
+
+@mixin game-font($size, $weight) {
+  font-family: "VT323", monospace;
+  font-size: $size;
+  font-weight: $weight;
+  line-height: 1;
+  text-shadow: 0.1rem 0.1rem 0.1rem rgba(0, 0, 0, 0.5);
+  font-smooth: 0;
+}

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Map Editor - v.0.0.1</title>
+    <link rel="stylesheet" href="/css/mapeditor.css" />
+    <script type="module" src="/scripts/mapeditor.js"></script>
+  </head>
+  <body>
+    <div class="game">
+      <div class="tools">
+        <button name="btnMapDimensions" title="Map dimensions">MD</button>
+        <button name="btnAtlasImporter" title="Atlas importer">AI</button>
+        <button name="btnSpriteCreator" title="Sprite creator">SC</button>
+      </div>
+      <div class="world">
+        <div class="background-layer"></div>
+        <div class="constructions-layer"></div>
+        <div class="props-layer"></div>
+        <div class="enemies-layer"></div>
+        <div class="players-layer"></div>
+      </div>
+    </div>
+    <dialog id="dlgMapDimensions">
+      <form>
+        <fieldset>
+          <legend>Map dimensions</legend>
+          <label>Map Width</label>
+          <input type="number" name="txtMapWidth" value="500" />
+          <label>Map Height</label>
+          <input type="number" name="txtMapHeight" value="500" />
+          <label>Tile Width</label>
+          <input type="number" name="txt" value="16" />
+          <label>Tile Height</label>
+          <input type="number" name="txt" value="16" />
+          <button type="button" id="btnMapDimensionsCancel">Cancel</button>
+          <button type="button" id="btnMapDimensionsOk">Ok</button>
+        </fieldset>
+      </form>
+    </dialog>
+  </body>
+</html>

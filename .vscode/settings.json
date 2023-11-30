@@ -8,7 +8,7 @@
     {
       "format":"expanded",
       "extensionName":".css",
-      "savePath":"/css"
+      "savePath":"/web/css"
     }
   ],
   "liveSassCompile.settings.useNewCompiler":true,

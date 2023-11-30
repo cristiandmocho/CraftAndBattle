@@ -1,0 +1,12 @@
+@mixin button() {
+  background: #444;
+  color: #fff;
+  border: solid 1px #888;
+  border-radius: 4px;
+  padding: 4px;
+  cursor: pointer;
+
+  &:hover {
+    background: #555;
+  }
+}

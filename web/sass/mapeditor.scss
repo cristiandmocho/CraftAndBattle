@@ -1,0 +1,110 @@
+@use "buttons" as *;
+
+@import "fonts";
+
+* {
+  box-sizing: border-box;
+  user-select: none;
+}
+
+html,
+body {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  @include game-font(1rem, normal);
+  background-color: #292929;
+  color: #fff;
+
+  .game {
+    height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 4fr;
+    gap: 8px;
+
+    .editor {
+      display: grid;
+      grid-template-rows: min-content auto;
+      gap: 4px;
+      padding: 8px;
+
+      .tools {
+        display: grid;
+        grid-auto-flow: column;
+        justify-content: start;
+        gap: 4px;
+        padding: 4px;
+        background-color: #333;
+        border: 1px solid #444;
+        border-radius: 4px;
+
+        button {
+          @include button();
+        }
+      }
+
+      .world {
+        border: solid 1px #888;
+        background: #444;
+        border-radius: 4px;
+        position: sticky;
+        overflow: auto;
+
+        // Styling the scrollbars
+        &::-webkit-scrollbar {
+          width: 8px;
+          height: 8px;
+        }
+        &::-webkit-scrollbar-track {
+          background: #444;
+        }
+        &::-webkit-scrollbar-thumb {
+          background: #666;
+          border-radius: 4px;
+        }
+
+        .map {
+          border: solid 1px #89a0aa;
+        }
+
+        div,
+        canvas {
+          position: absolute;
+        }
+
+        .map-grid {
+          z-index: 0;
+        }
+        .background-layer {
+          z-index: 1;
+        }
+        .constructions-layer {
+          z-index: 2;
+        }
+        .props-layer {
+          z-index: 3;
+        }
+        .enemies-layer {
+          z-index: 4;
+        }
+        .players-layer {
+          z-index: 5;
+        }
+
+        .tile-selector {
+          display: block;
+          position: absolute;
+          background: #555;
+          border: solid 1px #888;
+          z-index: 6;
+        }
+      }
+    }
+  }
+}
+
+@import "dialog";

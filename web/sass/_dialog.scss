@@ -1,0 +1,37 @@
+@use "buttons" as buttons;
+@use "forms" as forms;
+
+dialog {
+  background: #333;
+  color: #fff;
+  border: solid 1px #888;
+  border-radius: 8px;
+  padding: 0px;
+
+  legend {
+    padding: 8px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    background: #444;
+    margin-bottom: 10px;
+  }
+
+  form {
+    padding: 8px;
+    @include forms.fieldset();
+  }
+
+  .buttons {
+    background: #444;
+    display: grid;
+    grid-auto-flow: column;
+    justify-content: end;
+    gap: 4px;
+    margin-top: 10px;
+    padding: 8px;
+
+    button {
+      @include buttons.button();
+    }
+  }
+}

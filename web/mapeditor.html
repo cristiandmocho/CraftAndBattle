@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Map Editor - v.0.0.1</title>
+    <link rel="stylesheet" href="/css/mapeditor.css" />
+    <script type="module" src="/scripts/mapeditor.js"></script>
+  </head>
+  <body>
+    <div class="game">
+      <section class="inspector">
+        <legend>Inspector</legend>
+        <div class="assets">
+          <select name="ddAssetType">
+            <option value="sprite">Sprite</option>
+            <option value="animation">Animation</option>
+            <option value="enemy">Enemy spawn point</option>
+            <option value="player">Player spawn point</option>
+          </select>
+          <div class="asset-list"></div>
+        </div>
+        <div class="minimap">
+          <span class="view"></span>
+          <canvas class="minimap-canvas"></canvas>
+        </div>
+      </section>
+      <section class="editor">
+        <div class="tools">
+          <button name="btnMapDimensions" title="Map dimensions">MD</button>
+          <button name="btnAtlasImporter" title="Atlas importer">AI</button>
+          <button name="btnSpriteCreator" title="Sprite creator">SC</button>
+          <select name="ddLayer">
+            <option value="background">Background</option>
+            <option value="constructions">Constructions</option>
+            <option value="props">Props</option>
+            <option value="enemies">Enemies</option>
+            <option value="players">Players</option>
+          </select>
+          <button name="btnNewGameEntity" title="New Game Entity">New</button>
+          <button name="btnPlaceGameEntity" title="Place Game Entity">
+            Place
+          </button>
+          <button name="btnToggleGrid" title="Toggle grid">GR</button>
+        </div>
+        <div class="world">
+          <div class="map">
+            <span class="tile-selector"></span>
+            <div class="background-layer"></div>
+            <div class="constructions-layer"></div>
+            <div class="props-layer"></div>
+            <div class="enemies-layer"></div>
+            <div class="players-layer"></div>
+          </div>
+          <canvas class="map-grid"></canvas>
+        </div>
+      </section>
+    </div>
+    <dialog id="dlgMapDimensions">
+      <legend>Map Dimensions</legend>
+      <form>
+        <div class="formgroup">
+          <label>Map Width (px)</label>
+          <input type="number" name="txtMapWidth" value="20" />
+        </div>
+        <div class="formgroup">
+          <label>Map Height (px)</label>
+          <input type="number" name="txtMapHeight" value="20" />
+        </div>
+        <div class="formgroup">
+          <label>Tile Size (px)</label>
+          <input type="number" name="txtTileSize" value="32" />
+        </div>
+      </form>
+      <section class="buttons">
+        <button type="button" name="btnOk">Ok</button>
+        <button type="button" name="btnCancel">Cancel</button>
+      </section>
+    </dialog>
+  </body>
+</html>
