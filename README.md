@@ -58,6 +58,16 @@ At some point I'll start developing the UI Editor as well, which will allow me t
 
 Of course, I want my UI to be controlled by the Engine at the end of the day, so everything is consitent. If the game is half-baked using the Engine and Javascript, I might run into some problems later when I update either project.
 
-One solution is to use Web Components. I can implement the pieces in plain HTML/CSS/JS but give them specific properties and events, and ultimately use them simply as Entities in the engine, of type "UI Component". I'm not sure yet, but the idea are flowing!
+One solution is to use Web Components. I can implement the pieces in plain HTML/CSS/JS but give them specific properties and events, and ultimately use them simply as Entities in the engine, of type "UI Component". I'm not sure yet, but the ideas are flowing!
 
 Equally, if I need other types of entities for my game, I might use the same process and just organize them as different entities that the engine can recognize. This will also allow for `mods` for the games, as anything can be easily created as Web Components with specific "hooks" to talk to the engine. It could also allow for easier updates for the games.
+
+### Conclusion
+
+This is a long-term type of pet project, no reason at all to make it other than to satisfy my curiosity, the willing to learn new things and try new things, and (probably) have a nice tool to make JS games more easily.
+
+There's no structure at this point in time as the project JUST STARTED (2023-12-01), but at some point I'll start making some modifications and implementing some rules to it. Code-wise, it's a bit messy, but still following the best practices, mostly. Front-end code needs a bit of love, and as the server side grows, it will need some love too.
+
+It's a public project, so feel free to make suggestions, fork it, change it, send me PRs and propose new things. If I take your suggestions or implementations, I'll make sure to add your name to the list of contributors.
+
+All in all... just have fun! 😉
