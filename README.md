@@ -36,13 +36,13 @@ To write a consistent story for the game while building a map, while writting co
 
 So I took a step back to build this GORGEOUS map editor!
 
-![Map Editor Screenshot](https://private-user-images.githubusercontent.com/72891272/287126053-ba00c754-f1b0-4a3d-abed-83fe67d44aaa.png?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTEiLCJleHAiOjE3MDEzOTczMzYsIm5iZiI6MTcwMTM5NzAzNiwicGF0aCI6Ii83Mjg5MTI3Mi8yODcxMjYwNTMtYmEwMGM3NTQtZjFiMC00YTNkLWFiZWQtODNmZTY3ZDQ0YWFhLnBuZz9YLUFtei1BbGdvcml0aG09QVdTNC1ITUFDLVNIQTI1NiZYLUFtei1DcmVkZW50aWFsPUFLSUFJV05KWUFYNENTVkVINTNBJTJGMjAyMzEyMDElMkZ1cy1lYXN0LTElMkZzMyUyRmF3czRfcmVxdWVzdCZYLUFtei1EYXRlPTIwMjMxMjAxVDAyMTcxNlomWC1BbXotRXhwaXJlcz0zMDAmWC1BbXotU2lnbmF0dXJlPWVmYjA0MzgwYjViMDNjNmMwNTM3MTViZWZjYzM0OTU0ZDYzNjdiODFlOGRmYTE0Yzg0YWYxNjYyMTk1NDRlYTgmWC1BbXotU2lnbmVkSGVhZGVycz1ob3N0JmFjdG9yX2lkPTAma2V5X2lkPTAmcmVwb19pZD0wIn0.uOkvVSv1Qe8HSiLcC3xJSgbXhy1mDaJXhI6qVzXfuMQ)
+![Map Editor Screenshot](https://private-user-images.githubusercontent.com/72891272/287126053-ba00c754-f1b0-4a3d-abed-83fe67d44aaa.png)
 
 > Map Editor Screenshot
 
 It's far from ready, but it should end up having pretty much anything I need (at this moment) to build my tile-based maps. It allows for different map sizes and resolutions, you can (currently) save and load any map, toggle the tile grid and importing new assets (it actually uploads the selected assets to the proper folder), following the structure created on the server side when you save a new map:
 
-![Folder structure](https://private-user-images.githubusercontent.com/72891272/287126060-a0c0a80a-532d-4f95-a8f4-1239f3c40652.png?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTEiLCJleHAiOjE3MDEzOTczMzYsIm5iZiI6MTcwMTM5NzAzNiwicGF0aCI6Ii83Mjg5MTI3Mi8yODcxMjYwNjAtYTBjMGE4MGEtNTMyZC00Zjk1LWE4ZjQtMTIzOWYzYzQwNjUyLnBuZz9YLUFtei1BbGdvcml0aG09QVdTNC1ITUFDLVNIQTI1NiZYLUFtei1DcmVkZW50aWFsPUFLSUFJV05KWUFYNENTVkVINTNBJTJGMjAyMzEyMDElMkZ1cy1lYXN0LTElMkZzMyUyRmF3czRfcmVxdWVzdCZYLUFtei1EYXRlPTIwMjMxMjAxVDAyMTcxNlomWC1BbXotRXhwaXJlcz0zMDAmWC1BbXotU2lnbmF0dXJlPWQxNjM0YjM0YzJlZGIwNjA1YjBjNDFlNzk1Y2NjMjZhMTYwYjgwNWNiNDVkMjFjMTI4YjY2NTcwNzZjODU4NWQmWC1BbXotU2lnbmVkSGVhZGVycz1ob3N0JmFjdG9yX2lkPTAma2V5X2lkPTAmcmVwb19pZD0wIn0.e4YvmzlKugBhyxgt8PdBQGKgkJ1GTePusC0cEIFpJBY)
+![Folder structure](https://private-user-images.githubusercontent.com/72891272/287126060-a0c0a80a-532d-4f95-a8f4-1239f3c40652.png)
 
 This is the part that I'll change once it's done:
 
