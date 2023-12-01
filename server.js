@@ -3,7 +3,13 @@ import multer from "multer";
 import cors from "cors";
 import helmet from "helmet";
 
-import { existsSync, mkdirSync, writeFileSync } from "node:fs";
+import {
+  existsSync,
+  mkdirSync,
+  readFileSync,
+  readdirSync,
+  writeFileSync,
+} from "node:fs";
 import { resolve, join } from "node:path";
 
 class Server {
@@ -94,6 +100,17 @@ class Server {
       mkdirSync(join(destFolder, "assets", "textures"), { recursive: true });
       mkdirSync(join(destFolder, "assets", "audio"), { recursive: true });
       mkdirSync(join(destFolder, "assets", "animations"), { recursive: true });
+
+      // Saves thumbnail
+      if (!req.body.thumbnail) return;
+
+      const thumbnail = req.body.thumbnail.replace(
+        /^data:image\/png;base64,/,
+        ""
+      );
+      const thumbnailPath = join(destFolder, "thumbnail.png");
+
+      writeFileSync(thumbnailPath, thumbnail, "base64");
     });
 
     // Loading maps
@@ -106,7 +123,7 @@ class Server {
       const destPath = join(destFolder, `${name}.map.json`);
 
       // Makes sure the file exists
-      if (!existsSync(destFolder)) {
+      if (!existsSync(destPath)) {
         res.status(404).json({ error: `Map ${name} not found` });
         return;
       }
@@ -115,6 +132,48 @@ class Server {
       const mapData = JSON.parse(readFileSync(destPath));
 
       res.json(mapData);
+    });
+
+    // Listing maps
+    this.server.get("/listmaps", (req, res) => {
+      const destFolder = resolve(join("web", "maps"));
+      const maps = [];
+
+      // Makes sure the folder exists
+      if (!existsSync(destFolder)) {
+        res.status(404).json({ error: `No maps folder found` });
+        return;
+      }
+
+      // Reads the map data from disk
+      const dirs = readdirSync(destFolder, { withFileTypes: true });
+
+      dirs.forEach((dir) => {
+        if (!dir.isDirectory()) return;
+
+        const files = readdirSync(join(dir.path, dir.name), {
+          withFileTypes: true,
+        });
+        const destPath = join(
+          destFolder,
+          dir.name,
+          files.find((f) => f.name.endsWith(".map.json")).name
+        );
+        const mapData = JSON.parse(readFileSync(destPath));
+
+        const data = {
+          filename: destPath,
+          name: mapData.name,
+          thumbnail: join("maps", dir.name, "thumbnail.png").replace(
+            /\\/g,
+            "/"
+          ),
+        };
+
+        maps.push(data);
+      });
+
+      res.json(maps);
     });
   }
 

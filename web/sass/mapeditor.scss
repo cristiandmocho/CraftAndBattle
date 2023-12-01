@@ -146,6 +146,51 @@ body {
       }
     }
   }
+
+  #dlgLoadMap {
+    .body {
+      height: 100%;
+      display: grid;
+      grid-template-rows: min-content auto min-content;
+
+      .map-list {
+        padding: 8px;
+        overflow: auto;
+        display: grid;
+        gap: 4px;
+        align-items: start;
+
+        @include scrollbar();
+
+        .no-maps {
+          text-align: center;
+          font-size: 1.2rem;
+          color: #888;
+        }
+
+        .map-item {
+          cursor: pointer;
+          display: grid;
+          grid-template-columns: min-content auto min-content;
+          gap: 8px;
+          padding: 8px;
+          border-radius: 4px;
+          background: #444;
+          border: solid 1px #888;
+
+          .thumbnail {
+            width: 64px;
+            height: 64px;
+            border-radius: 4px;
+          }
+
+          &:hover {
+            background: #555;
+          }
+        }
+      }
+    }
+  }
 }
 
 @import "dialog";

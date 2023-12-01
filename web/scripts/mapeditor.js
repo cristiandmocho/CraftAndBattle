@@ -9,6 +9,7 @@
     grid: World.querySelector(".map-grid"),
     name: "New Map",
     filename: null,
+    thumbnail: null,
     unsaved: true,
     data: null,
     size: { width: 20, height: 20 }, // In tiles!!!
@@ -37,10 +38,147 @@
       Map.tileSelector.style.top = `${tilePos.y}px`;
     },
     Save() {
-      updatePageTitle();
+      const name = prompt("Enter a name for the map", Map.name);
+
+      if (!name) return;
+
+      const data = {
+        name: name,
+        size: Map.size,
+        resolution: Map.resolution,
+        data: Map.data,
+      };
+
+      const requestOptions = {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      };
+
+      fetch("http://localhost:3000/savemap", requestOptions)
+        .catch((err) => {
+          console.log(err);
+          alert("Save failed, check console for details");
+        })
+        .then((response) => response.json())
+        .then((data) => {
+          Map.unsaved = false;
+          Map.filename = data.file;
+          Map.name = name;
+
+          alert("Save complete");
+
+          updatePageTitle();
+        });
     },
-    Load() {
-      updatePageTitle();
+    async GetList() {
+      const requestOptions = {
+        method: "GET",
+      };
+
+      const data = await fetch(
+        "http://localhost:3000/listmaps",
+        requestOptions
+      );
+      const list = await data.json();
+
+      return list;
+    },
+    async Load() {
+      const list = await Map.GetList();
+      const dlg = document.querySelector("#dlgLoadMap");
+
+      const renderList = (list) => {
+        const listContainer = dlg.querySelector(".map-list");
+
+        if (list.length === 0) {
+          listContainer.innerHTML = `<div class="no-maps"><span>No maps found</span></div>`;
+          return;
+        }
+
+        listContainer.innerHTML = "";
+        list.forEach((map, i) => {
+          map.id = i.toString();
+
+          const item = document.createElement("div");
+
+          item.classList.add("map-item");
+          item.innerHTML = `<div class="thumbnail" style="background-image: url(${map.thumbnail})"></div><span>${map.name}</span><i class="mdi"></i>`;
+          item.dataset.id = i;
+
+          item.addEventListener("click", (e) => {
+            const selected = listContainer.querySelector(".selected");
+
+            if (selected) {
+              selected.querySelector(".mdi").innerText = "";
+              selected.classList.remove("selected");
+            }
+
+            e.currentTarget.classList.toggle("selected");
+            e.currentTarget.querySelector(".mdi").innerText = "check";
+          });
+
+          listContainer.appendChild(item);
+        });
+      };
+
+      const dlgButtonsClick = async (e) => {
+        const target = e.target;
+        const action = target.name;
+
+        if (action === "btnOk") {
+          const selected = dlg.querySelector(".map-list .selected");
+
+          if (!selected) {
+            alert("Select a map to load");
+            return;
+          }
+
+          const map = list.find((m) => m.id === selected.dataset.id);
+
+          if (!map) {
+            alert("Select a map to load");
+            return;
+          }
+
+          const requestOptions = {
+            method: "GET",
+          };
+
+          const data = await fetch(
+            `http://localhost:3000/loadmap?name=${map.name}`,
+            requestOptions
+          );
+          const mapData = await data.json();
+
+          Map.name = mapData.name;
+          Map.size = mapData.size;
+          Map.resolution = mapData.resolution;
+          Map.data = mapData.data;
+          Map.filename = mapData.filename;
+          Map.thumbnail = mapData.thumbnail;
+          Map.unsaved = false;
+
+          resizeMap(Map.size.width, Map.size.height, Map.resolution);
+          showGrid();
+          updatePageTitle();
+
+          alert("Map loaded successfully");
+
+          dlg.close();
+          dlg.removeEventListener("click", dlgButtonsClick);
+        }
+
+        if (action === "btnCancel") {
+          dlg.close();
+          dlg.removeEventListener("click", dlgButtonsClick);
+        }
+      };
+
+      dlg.showModal();
+      dlg.addEventListener("click", dlgButtonsClick);
+
+      renderList(list);
     },
   };
 
