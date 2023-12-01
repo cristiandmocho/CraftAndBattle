@@ -36,13 +36,13 @@ To write a consistent story for the game while building a map, while writting co
 
 So I took a step back to build this GORGEOUS map editor!
 
-![Map Editor Screenshot](https://private-user-images.githubusercontent.com/72891272/287126053-ba00c754-f1b0-4a3d-abed-83fe67d44aaa.png)
+![Map Editor Screenshot](https://ezsystems.net/images/map-editor.png)
 
 > Map Editor Screenshot
 
 It's far from ready, but it should end up having pretty much anything I need (at this moment) to build my tile-based maps. It allows for different map sizes and resolutions, you can (currently) save and load any map, toggle the tile grid and importing new assets (it actually uploads the selected assets to the proper folder), following the structure created on the server side when you save a new map:
 
-![Folder structure](https://private-user-images.githubusercontent.com/72891272/287126060-a0c0a80a-532d-4f95-a8f4-1239f3c40652.png)
+![Folder structure](https://ezsystems.net/images/folder-structure.png)
 
 This is the part that I'll change once it's done:
 
